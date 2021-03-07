@@ -81,7 +81,7 @@ bool batteryIsOk(float temperature, float soc, float chargeRate) {
 	bool results=false;
 	results = ValidateBattery(batterystats);
 	delete batterystats;
-	retrun results;
+	return results;
 }
 
 
