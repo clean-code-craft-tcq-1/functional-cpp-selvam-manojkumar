@@ -78,7 +78,10 @@ bool ValidateBattery(BatteryParams * batterystatus) {
 
 bool batteryIsOk(float temperature, float soc, float chargeRate) {
 	class BatteryParams* batterystats  = new BatteryParams(temperature, soc, chargeRate);
-	return ValidateBattery(batterystats);
+	bool results=false;
+	results = ValidateBattery(batterystats);
+	delete batterystats;
+	retrun results;
 }
 
 
