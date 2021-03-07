@@ -70,15 +70,21 @@ bool BatteryParams::ValidateChargeRate() {
 	}
 }
 
-bool batteryIsOk(BatteryParams * batterystatus) {
+bool ValidateBattery(BatteryParams * batterystatus) {
 	bool rc = false;
 	rc = (batterystatus->ValidateTemperature() && batterystatus->ValidateChargeRate() && batterystatus->ValidateStateOfCharge());
 	return rc;
 }
 
+bool batteryIsOk(float temperature, float soc, float chargeRate) {
+	class BatteryParams* batterystats  = new BatteryParams(temperature, soc, chargeRate);
+	return ValidateBattery(batterystats);
+}
 
 
 int main() {
 	assert(batteryIsOk(25, 70, 0.7) == true);
 	assert(batteryIsOk(50, 85, 0) == false);
+	assert(batteryIsOk(25, 70, 0.9) == false);
+	assert(batteryIsOk(0, 90, 0.9) == false);
 }
